@@ -1,8 +1,8 @@
-<nav class="bg-white border-b border-gray-200" x-data="{ open: false, userMenu: false }">
+<nav class="bg-white border-b border-gray-200 relative" x-data="{ open: false, userMenu: false }">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex items-center gap-8">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-2 text-indigo-600 font-bold text-lg tracking-tight">
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-2 text-indigo-600 font-bold text-lg tracking-tight shrink-0 relative z-10">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <div x-show="open" class="sm:hidden border-t border-gray-100 bg-white">
+    <div x-show="open" @click.outside="open = false" class="sm:hidden absolute top-full left-0 right-0 border-t border-gray-100 bg-white shadow-lg z-40">
         <div class="px-4 pt-2 pb-3 space-y-1">
             <a href="{{ route('dashboard') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Painel</a>
             <a href="{{ route('tickets.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Chamados</a>

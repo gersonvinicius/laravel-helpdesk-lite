@@ -98,7 +98,7 @@
 
         <!-- Sidebar com detalhes -->
         <div class="space-y-4">
-            <div class="bg-white rounded-xl border border-gray-100 p-5 space-y-4">
+            <div class="bg-white rounded-xl border border-gray-100 p-5 grid grid-cols-2 gap-4 lg:grid-cols-1 lg:gap-0 lg:space-y-4">
                 <div>
                     <label class="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1.5">Status</label>
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium {{ $ticket->status->badgeClass() }}">
@@ -136,7 +136,7 @@
                         </p>
                     </div>
                 @endif
-                <div class="pt-2 border-t border-gray-100 space-y-2">
+                <div class="col-span-2 lg:col-span-1 pt-2 border-t border-gray-100 space-y-2 lg:pt-2">
                     <div>
                         <label class="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-0.5">Criado</label>
                         <p class="text-xs text-gray-500">{{ $ticket->created_at->format('d/m/Y H:i') }}</p>
