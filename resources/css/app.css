@@ -66,13 +66,16 @@ trix-toolbar .trix-button-group--file-tools {
 }
 /* Editor background */
 .dark trix-editor {
-    @apply bg-gray-800;
+    background-color: #1f2937 !important; /* gray-800 */
+    color: #f3f4f6 !important;            /* gray-100 */
+    caret-color: #f3f4f6 !important;
 }
-/* Target the actual contenteditable div inside trix-editor */
+/* Also target the inner contenteditable and any children */
+.dark trix-editor .trix-content,
 .dark trix-editor [contenteditable],
-.dark trix-editor div[contenteditable="true"] {
-    color: #f3f4f6 !important; /* gray-100 */
-    caret-color: #f3f4f6;
+.dark trix-editor * {
+    color: #f3f4f6 !important;
+    caret-color: #f3f4f6 !important;
 }
 
 /* Trix content display */
