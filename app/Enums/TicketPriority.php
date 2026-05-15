@@ -24,10 +24,10 @@ enum TicketPriority: string
     public function badgeClass(): string
     {
         return match($this) {
-            self::Baixa => 'bg-gray-100 text-gray-800',
-            self::Media => 'bg-blue-100 text-blue-800',
-            self::Alta => 'bg-orange-100 text-orange-800',
-            self::Critica => 'bg-red-100 text-red-800',
+            self::Baixa   => 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
+            self::Media   => 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300',
+            self::Alta    => 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300',
+            self::Critica => 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300',
         };
     }
 

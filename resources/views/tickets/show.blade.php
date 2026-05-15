@@ -27,7 +27,7 @@
             <!-- Descrição -->
             <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 p-6">
                 <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-4">Descrição</h2>
-                <div class="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed">{{ $ticket->description }}</div>
+                <div class="trix-content prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">{!! clean($ticket->description) !!}</div>
             </div>
 
             <!-- Comentários -->
@@ -61,7 +61,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed ml-9">{{ $comment->body }}</div>
+                                <div class="trix-content text-sm text-gray-700 dark:text-gray-300 leading-relaxed ml-9">{!! clean($comment->body) !!}</div>
                             </div>
                         @endforeach
                     </div>
@@ -72,8 +72,10 @@
                     <div class="px-6 py-5 border-t border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50">
                         <form method="POST" action="{{ route('tickets.comments.store', $ticket) }}" class="space-y-3">
                             @csrf
-                            <textarea name="body" rows="3" placeholder="Adicionar comentário..."
-                                      class="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-400 resize-none @error('body') border-red-400 @enderror">{{ old('body') }}</textarea>
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-indigo-300 @error('body') border-red-400 @enderror">
+                                <input id="comment-body" type="hidden" name="body" value="{{ old('body') }}">
+                                <trix-editor input="comment-body" placeholder="Adicionar comentário..."></trix-editor>
+                            </div>
                             @error('body')
                                 <p class="text-xs text-red-600">{{ $message }}</p>
                             @enderror

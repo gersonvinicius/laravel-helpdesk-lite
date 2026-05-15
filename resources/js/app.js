@@ -1,6 +1,10 @@
 import './bootstrap';
+import 'trix';
 
 import Alpine from 'alpinejs';
+
+// Disable Trix file attachments (uploads not yet implemented)
+document.addEventListener('trix-file-accept', (e) => e.preventDefault());
 
 window.Alpine = Alpine;
 

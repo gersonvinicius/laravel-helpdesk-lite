@@ -116,9 +116,9 @@ class TicketController extends Controller
 
         TicketComment::create([
             'ticket_id' => $ticket->id,
-            'user_id' => Auth::id(),
-            'body' => $request->validated('body'),
-            'internal' => (bool) $request->validated('internal', false),
+            'user_id'   => Auth::id(),
+            'body'      => clean($request->validated('body')),
+            'internal'  => (bool) $request->validated('internal', false),
         ]);
 
         return redirect()
