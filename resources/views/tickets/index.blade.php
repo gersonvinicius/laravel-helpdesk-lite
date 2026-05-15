@@ -1,18 +1,9 @@
 <x-app-layout>
     <x-slot name="title">Chamados</x-slot>
 
-    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Chamados</h1>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{{ $tickets->total() }} chamado(s) encontrado(s)</p>
-        </div>
-        <a href="{{ route('tickets.create') }}"
-           class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-            </svg>
-            Novo Chamado
-        </a>
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Chamados</h1>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{{ $tickets->total() }} chamado(s) encontrado(s)</p>
     </div>
 
     <!-- Filtros -->
