@@ -16,21 +16,25 @@ class TicketService
     public function create(StoreTicketRequest $request, User $requester): Ticket
     {
         return Ticket::create([
-            'number' => TicketNumberGenerator::generate(),
-            'title' => $request->validated('title'),
-            'description' => $request->validated('description'),
-            'status' => TicketStatus::Aberto,
-            'priority' => $request->validated('priority'),
+            'number'      => TicketNumberGenerator::generate(),
+            'title'       => $request->validated('title'),
+            'description' => clean($request->validated('description')),
+            'status'      => TicketStatus::Aberto,
+            'priority'    => $request->validated('priority'),
             'category_id' => $request->validated('category_id'),
-            'requester_id' => $requester->id,
+            'requester_id'=> $requester->id,
             'assignee_id' => $request->validated('assignee_id'),
-            'due_date' => $request->validated('due_date'),
+            'due_date'    => $request->validated('due_date'),
         ]);
     }
 
     public function update(UpdateTicketRequest $request, Ticket $ticket): Ticket
     {
         $data = $request->validated();
+
+        if (isset($data['description'])) {
+            $data['description'] = clean($data['description']);
+        }
 
         if (isset($data['status'])) {
             $closingStatuses = [TicketStatus::Resolvido, TicketStatus::Fechado];

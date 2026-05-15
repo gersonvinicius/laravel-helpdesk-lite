@@ -14,7 +14,11 @@ class StoreTicketCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'body' => ['required', 'string', 'min:2', 'max:5000'],
+            'body' => ['required', 'string', 'max:10000', function ($attribute, $value, $fail) {
+                if (mb_strlen(strip_tags($value)) < 2) {
+                    $fail('O comentário deve ter pelo menos 2 caracteres.');
+                }
+            }],
             'internal' => ['boolean'],
         ];
     }
@@ -23,7 +27,6 @@ class StoreTicketCommentRequest extends FormRequest
     {
         return [
             'body.required' => 'O comentário não pode estar vazio.',
-            'body.min' => 'O comentário deve ter pelo menos 2 caracteres.',
         ];
     }
 }

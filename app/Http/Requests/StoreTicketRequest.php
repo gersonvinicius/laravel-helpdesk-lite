@@ -18,7 +18,11 @@ class StoreTicketRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'min:5', 'max:255'],
-            'description' => ['required', 'string', 'min:10'],
+            'description' => ['required', 'string', function ($attribute, $value, $fail) {
+                if (mb_strlen(strip_tags($value)) < 10) {
+                    $fail('A descrição deve ter pelo menos 10 caracteres.');
+                }
+            }],
             'priority' => ['required', Rule::enum(TicketPriority::class)],
             'category_id' => ['nullable', 'exists:categories,id'],
             'assignee_id' => ['nullable', 'exists:users,id'],
@@ -32,7 +36,6 @@ class StoreTicketRequest extends FormRequest
             'title.required' => 'O título é obrigatório.',
             'title.min' => 'O título deve ter pelo menos 5 caracteres.',
             'description.required' => 'A descrição é obrigatória.',
-            'description.min' => 'A descrição deve ter pelo menos 10 caracteres.',
             'priority.required' => 'A prioridade é obrigatória.',
             'due_date.after_or_equal' => 'A data limite não pode ser no passado.',
         ];
