@@ -27,6 +27,8 @@ class StoreTicketRequest extends FormRequest
             'category_id' => ['nullable', 'exists:categories,id'],
             'assignee_id' => ['nullable', 'exists:users,id'],
             'due_date' => ['nullable', 'date', 'after_or_equal:today'],
+            'tags'   => ['nullable', 'array'],
+            'tags.*' => ['integer', 'exists:tags,id'],
         ];
     }
 

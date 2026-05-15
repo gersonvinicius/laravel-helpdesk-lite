@@ -119,6 +119,18 @@
                         <p class="text-sm text-gray-700 dark:text-gray-300">{{ $ticket->category->name }}</p>
                     </div>
                 @endif
+                @if($ticket->tags->isNotEmpty())
+                    <div>
+                        <label class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-1.5">Tags</label>
+                        <div class="flex flex-wrap gap-1.5">
+                            @foreach($ticket->tags as $tag)
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium {{ $tag->badgeClass() }}">
+                                    {{ $tag->name }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
                 <div>
                     <label class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-1.5">Solicitante</label>
                     <p class="text-sm text-gray-700 dark:text-gray-300">{{ $ticket->requester?->name ?? '—' }}</p>

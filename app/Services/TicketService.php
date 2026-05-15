@@ -15,7 +15,7 @@ class TicketService
 {
     public function create(StoreTicketRequest $request, User $requester): Ticket
     {
-        return Ticket::create([
+        $ticket = Ticket::create([
             'number'      => TicketNumberGenerator::generate(),
             'title'       => $request->validated('title'),
             'description' => clean($request->validated('description')),
@@ -26,6 +26,10 @@ class TicketService
             'assignee_id' => $request->validated('assignee_id'),
             'due_date'    => $request->validated('due_date'),
         ]);
+
+        $ticket->tags()->sync($request->validated('tags', []));
+
+        return $ticket;
     }
 
     public function update(UpdateTicketRequest $request, Ticket $ticket): Ticket
@@ -49,6 +53,8 @@ class TicketService
         }
 
         $ticket->update($data);
+
+        $ticket->tags()->sync($request->validated('tags', []));
 
         return $ticket->refresh();
     }

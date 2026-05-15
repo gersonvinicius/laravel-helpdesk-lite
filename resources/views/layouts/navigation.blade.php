@@ -17,6 +17,12 @@
                        class="px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('tickets.*') ? 'bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800' }}">
                         Chamados
                     </a>
+                    @if(auth()->user()->isAdmin())
+                        <a href="{{ route('tags.index') }}"
+                           class="px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('tags.*') ? 'bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800' }}">
+                            Tags
+                        </a>
+                    @endif
                 </div>
             </div>
 

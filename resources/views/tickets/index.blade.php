@@ -34,11 +34,20 @@
                 @endforeach
             </select>
 
+            @if($tags->isNotEmpty())
+                <select name="tag_id" class="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                    <option value="">Todas as tags</option>
+                    @foreach($tags as $tag)
+                        <option value="{{ $tag->id }}" @selected(request('tag_id') == $tag->id)>{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+            @endif
+
             <div class="flex gap-2">
                 <button type="submit" class="flex-1 px-3 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
                     Filtrar
                 </button>
-                @if(request()->hasAny(['search', 'status', 'priority', 'category_id', 'assignee_id']))
+                @if(request()->hasAny(['search', 'status', 'priority', 'category_id', 'assignee_id', 'tag_id']))
                     <a href="{{ route('tickets.index') }}" class="px-3 py-2 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors whitespace-nowrap">
                         Limpar
                     </a>
@@ -71,6 +80,7 @@
                             <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Status</th>
                             <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">Prioridade</th>
                             <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide hidden md:table-cell">Responsável</th>
+                            <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide hidden lg:table-cell">Tags</th>
                             <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide hidden lg:table-cell">Vencimento</th>
                             <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide hidden lg:table-cell">Criado</th>
                             <th class="px-6 py-3"></th>
@@ -102,6 +112,17 @@
                                 </td>
                                 <td class="px-6 py-4 text-gray-500 dark:text-gray-400 hidden md:table-cell">
                                     {{ $ticket->assignee?->name ?? '—' }}
+                                </td>
+                                <td class="px-6 py-4 hidden lg:table-cell">
+                                    @if($ticket->tags->isNotEmpty())
+                                        <div class="flex flex-wrap gap-1">
+                                            @foreach($ticket->tags as $tag)
+                                                <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium {{ $tag->badgeClass() }}">{{ $tag->name }}</span>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <span class="text-gray-300 dark:text-gray-600">—</span>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4 hidden lg:table-cell">
                                     @if ($ticket->due_date)

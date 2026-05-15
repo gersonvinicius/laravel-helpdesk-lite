@@ -101,6 +101,26 @@
                     </div>
                 @endif
 
+                @if($tags->isNotEmpty())
+                    @php $selectedTags = old('tags', $ticket->tags->pluck('id')->toArray()); @endphp
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tags</label>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($tags as $tag)
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="sr-only peer"
+                                           @checked(in_array($tag->id, (array) $selectedTags))>
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border-2 border-transparent
+                                                 peer-checked:border-indigo-500 peer-checked:ring-1 peer-checked:ring-indigo-400
+                                                 transition-all {{ $tag->badgeClass() }}">
+                                        {{ $tag->name }}
+                                    </span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
                 <div class="flex gap-3 pt-2">
                     <button type="submit" class="px-5 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
                         Salvar Alterações

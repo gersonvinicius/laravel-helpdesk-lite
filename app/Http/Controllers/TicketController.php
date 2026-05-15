@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTicketCommentRequest;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Models\Ticket;
 use App\Models\TicketComment;
 use App\Models\User;
@@ -26,21 +27,23 @@ class TicketController extends Controller
 
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        $tickets = Ticket::with(['requester', 'assignee', 'category'])
+        $tickets = Ticket::with(['requester', 'assignee', 'category', 'tags'])
             ->when(! $user->isAtendente(), fn ($q) => $q->where('requester_id', $user->id))
             ->when(request('search'), fn ($q, $s) => $q->where(fn ($q) => $q->where('title', 'like', "%{$s}%")->orWhere('description', 'like', "%{$s}%")))
             ->when(request('status'), fn ($q, $s) => $q->where('status', $s))
             ->when(request('priority'), fn ($q, $p) => $q->where('priority', $p))
             ->when(request('assignee_id'), fn ($q, $a) => $q->where('assignee_id', $a))
             ->when(request('category_id'), fn ($q, $c) => $q->where('category_id', $c))
+            ->when(request('tag_id'), fn ($q, $t) => $q->whereHas('tags', fn ($q) => $q->where('tags.id', $t)))
             ->orderByDesc('created_at')
             ->paginate(15)
             ->withQueryString();
 
         $categories = Category::where('active', true)->orderBy('name')->get();
         $atendentes = User::whereIn('role', ['admin', 'atendente'])->orderBy('name')->get();
+        $tags = Tag::orderBy('name')->get();
 
-        return view('tickets.index', compact('tickets', 'categories', 'atendentes'));
+        return view('tickets.index', compact('tickets', 'categories', 'atendentes', 'tags'));
     }
 
     public function create(): View
@@ -49,8 +52,9 @@ class TicketController extends Controller
 
         $categories = Category::where('active', true)->orderBy('name')->get();
         $atendentes = User::whereIn('role', ['admin', 'atendente'])->orderBy('name')->get();
+        $tags = Tag::orderBy('name')->get();
 
-        return view('tickets.create', compact('categories', 'atendentes'));
+        return view('tickets.create', compact('categories', 'atendentes', 'tags'));
     }
 
     public function store(StoreTicketRequest $request): RedirectResponse
@@ -70,7 +74,7 @@ class TicketController extends Controller
     {
         $this->authorize('view', $ticket);
 
-        $ticket->load(['requester', 'assignee', 'category', 'comments.user']);
+        $ticket->load(['requester', 'assignee', 'category', 'comments.user', 'tags']);
 
         $categories = Category::where('active', true)->orderBy('name')->get();
         $atendentes = User::whereIn('role', ['admin', 'atendente'])->orderBy('name')->get();
@@ -84,8 +88,9 @@ class TicketController extends Controller
 
         $categories = Category::where('active', true)->orderBy('name')->get();
         $atendentes = User::whereIn('role', ['admin', 'atendente'])->orderBy('name')->get();
+        $tags = Tag::orderBy('name')->get();
 
-        return view('tickets.edit', compact('ticket', 'categories', 'atendentes'));
+        return view('tickets.edit', compact('ticket', 'categories', 'atendentes', 'tags'));
     }
 
     public function update(UpdateTicketRequest $request, Ticket $ticket): RedirectResponse
