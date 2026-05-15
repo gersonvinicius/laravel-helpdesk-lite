@@ -34,6 +34,11 @@ trix-editor:empty:not(:focus)::before {
     @apply text-gray-400;
 }
 
+/* Hide file attachment button (upload not yet implemented) */
+trix-toolbar .trix-button-group--file-tools {
+    display: none !important;
+}
+
 /* Dark mode */
 .dark trix-toolbar {
     @apply border-gray-700 bg-gray-900;
@@ -42,9 +47,13 @@ trix-editor:empty:not(:focus)::before {
     @apply border-gray-700;
 }
 .dark trix-toolbar .trix-button {
-    @apply text-gray-400;
+    @apply text-gray-300;
     background: none;
     border-bottom: none;
+}
+/* Invert SVG icon sprites so they're visible on dark background */
+.dark trix-toolbar .trix-button--icon::before {
+    filter: invert(0.85);
 }
 .dark trix-toolbar .trix-button:hover {
     @apply bg-gray-800 text-gray-100;
@@ -52,8 +61,18 @@ trix-editor:empty:not(:focus)::before {
 .dark trix-toolbar .trix-button.trix-active {
     @apply bg-gray-700 text-indigo-300;
 }
+.dark trix-toolbar .trix-button.trix-active::before {
+    filter: invert(0.9);
+}
+/* Editor background */
 .dark trix-editor {
-    @apply bg-gray-800 text-gray-100;
+    @apply bg-gray-800;
+}
+/* Target the actual contenteditable div inside trix-editor */
+.dark trix-editor [contenteditable],
+.dark trix-editor div[contenteditable="true"] {
+    color: #f3f4f6 !important; /* gray-100 */
+    caret-color: #f3f4f6;
 }
 
 /* Trix content display */
