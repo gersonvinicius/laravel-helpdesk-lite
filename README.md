@@ -66,7 +66,7 @@ Pequenas equipes perdem tempo gerenciando solicitações por e-mail, WhatsApp ou
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/seu-usuario/laravel-helpdesk-lite.git
+git clone https://github.com/gersonvinicius/laravel-helpdesk-lite.git
 cd laravel-helpdesk-lite
 
 # Instalar dependências PHP
@@ -182,14 +182,12 @@ GET    /api/tickets/stats    # Estatísticas gerais
 - [x] Testes automatizados com Pest
 - [x] Filtros e paginação
 
-### Fase 2 — Versão Desktop com NativePHP 🗺️
+### Fase 2 — Produção e Notificações 🗺️
 
-Este projeto foi arquitetado para ser portado para uma **aplicação desktop distribuível** usando [NativePHP](https://nativephp.com), permitindo que usuários instalem e rodem o HelpDesk Lite localmente **sem configurar qualquer ambiente de desenvolvimento**.
-
-- [ ] Integração com NativePHP (Electron ou NAPI)
-- [ ] SQLite local como banco de dados padrão (já configurado)
-- [ ] Build e empacotamento para Windows (`.exe`) e macOS (`.dmg`)
-- [ ] Auto-updater integrado
+- [ ] Deploy em produção (Railway / Render / VPS)
+- [ ] Notificações por e-mail ao abrir e atualizar chamados
+- [ ] Upload de anexos nos chamados
+- [ ] PWA — instalável no celular via navegador
 
 ### Fase 3 — Recursos Adicionais 📋
 - [ ] Notificações por e-mail ao atualizar status
@@ -218,35 +216,6 @@ Distribuído sob a licença [MIT](https://opensource.org/licenses/MIT).
 
 > **Este projeto faz parte de um portfólio de desenvolvimento Laravel moderno.**
 > Criado para demonstrar boas práticas com Laravel 13, Livewire 4, Tailwind CSS 4 e Pest.
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
 ```bash
 composer require laravel/boost --dev
