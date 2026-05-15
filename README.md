@@ -175,26 +175,61 @@ GET    /api/tickets/stats    # Estatísticas gerais
 
 ### Fase 1 — MVP Web ✅
 - [x] Gestão completa de chamados (CRUD)
-- [x] Dashboard com métricas
+- [x] Dashboard com métricas em tempo real
 - [x] Sistema de comentários com notas internas
 - [x] Três perfis de acesso com políticas de autorização
 - [x] REST API autenticada com Sanctum
-- [x] Testes automatizados com Pest
-- [x] Filtros e paginação
+- [x] Testes automatizados com Pest (48 testes, 116 assertions)
+- [x] Filtros avançados e paginação
 
-### Fase 2 — Produção e Notificações 🗺️
+### Fase 2 — UX & Personalização 🎨
+- [ ] Tema escuro/claro com toggle in-app e persistência por usuário
+- [ ] Suporte a múltiplos idiomas (pt-BR / en)
+- [ ] Editor rich text nas descrições e comentários (TipTap)
+- [ ] Upload de anexos nos chamados (imagens, PDFs, documentos)
+- [ ] Avatar e perfil do usuário editáveis
+- [ ] Tags personalizadas nos chamados
+- [ ] Campos customizados por categoria (configuráveis pelo admin)
 
-- [ ] Deploy em produção (Railway / Render / VPS)
-- [ ] Notificações por e-mail ao abrir e atualizar chamados
-- [ ] Upload de anexos nos chamados
-- [ ] PWA — instalável no celular via navegador
-
-### Fase 3 — Recursos Adicionais 📋
-- [ ] Notificações por e-mail ao atualizar status
-- [ ] Painel de SLA e relatórios
-- [ ] Upload de anexos nos chamados
-- [ ] Tags personalizadas
+### Fase 3 — Comunicação & Notificações 🔔
+- [ ] Sino de notificações in-app com contagem de não lidas
+- [ ] Notificações por e-mail (novo chamado, mudança de status, novo comentário)
+- [ ] Templates de e-mail personalizáveis pelo admin
+- [ ] @menções em comentários com notificação para o usuário citado
+- [ ] Respostas rápidas — snippets pré-definidos para atendentes
 - [ ] Integração com Slack/Teams via webhooks
+
+### Fase 4 — Administração, SLA & Relatórios 📊
+- [ ] **Tela de Configurações completa:**
+  - Geral: nome do sistema, logo, tema padrão, idioma
+  - E-mail: SMTP (host, porta, credenciais, teste de envio)
+  - Backup: agendamento automático, pasta destino, download manual do `.sql`
+  - Relatórios: pasta destino, formato padrão (PDF / CSV)
+- [ ] **Relatórios e métricas:**
+  - Chamados por status, prioridade e categoria (gráficos com Chart.js)
+  - Tempo médio de resolução por atendente
+  - Desempenho da equipe por período
+  - Exportação para PDF e CSV
+- [ ] Configuração de SLA por prioridade (metas de resposta e resolução)
+- [ ] Horário de funcionamento da equipe (útil para cálculo de SLA)
+- [ ] Log de auditoria global — quem alterou o quê e quando
+
+### Fase 5 — Distribuição & Instalador 📦
+- [ ] **Wizard de instalação guiado** (primeira execução):
+  - Preferência de tema (claro/escuro)
+  - Idioma do sistema
+  - Criação da conta administrador
+  - Configuração do banco de dados
+  - Configuração de e-mail (SMTP)
+  - Nome e logotipo do sistema
+- [ ] **Empacotamento para distribuição local** (usuário baixa e executa, acessa via navegador):
+  - Docker Compose — self-hosting web com `docker compose up`
+  - Installer Windows `.exe` com PHP + Nginx embutidos
+  - Installer macOS `.dmg`
+  - Installer Linux `.deb` / `.AppImage`
+- [ ] Auto-updater integrado
+- [ ] Deploy em nuvem (Railway / Render / VPS)
+- [ ] Suporte a múltiplos bancos (MySQL / PostgreSQL além do SQLite padrão)
 
 ---
 
